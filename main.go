@@ -86,9 +86,10 @@ func main() {
 						if bytes.Equal(chksum2[:], chksum[:]) {
 							log.Println("These two files are equal:", dirs[i], event.Name)
 							notequal = true
-							newPath := filepath.Join(paths.To, filepath.Base(dirs[i]))
-							log.Println("Moving", dirs[i], "to", newPath)
-							os.Rename(dirs[i], newPath)
+							// newPath := filepath.Join(paths.To, filepath.Base(dirs[i]))
+							// log.Println("Moving", dirs[i], "to", newPath)
+							log.Println("Deleting", dirs[i])
+							os.Remove(dirs[i])
 						}
 					}
 					log.Println("created file:", event.Name)
