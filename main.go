@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"crypto/sha1"
 	"github.com/fsnotify/fsnotify"
+	"strings"
 )
 
 type WatcherStruct struct {
@@ -45,7 +46,7 @@ func main() {
 			select {
 			case event := <-watcher.Events:
 				// run this stuff when a new file is created
-				if event.Op&fsnotify.Create == fsnotify.Create {
+				if (event.Op&fsnotify.Create == fsnotify.Create) && strings.HasSuffix(event.Name, ".pdf") {
 					// list all files in the input file path
 					dirs, erro := filepath.Glob(filepath.Join(paths.From, "*.pdf"))
 					if erro != nil {
